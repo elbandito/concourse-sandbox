@@ -1,0 +1,16 @@
+---
+resources:
+  - name: git-resource
+    type: git
+    source:
+      uri: https://github.com/elbandito/concourse-sandbox.git 
+      branch: master 
+
+jobs:
+- name: external-task-job
+  public: true
+  plan:
+    - get: git-resource
+      trigger: true
+    - task: hello-world 
+      file: git-resource/tasks/task_hello_world.yml
